@@ -130,6 +130,7 @@ public class Preferences {
     return localization;
   }
 
+
   public ForgedAlliancePrefs getForgedAlliance() {
     return forgedAlliance;
   }
