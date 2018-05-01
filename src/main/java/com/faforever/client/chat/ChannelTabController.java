@@ -210,7 +210,11 @@ public class ChannelTabController extends AbstractChatTabController {
         synchronized (chatUserControlMap) {
           for (Map.Entry<Pane, ChatUserItemController> chatUserControlEntry : chatUserControlMap.entrySet()) {
             ChatUserItemController chatUserItemController = chatUserControlEntry.getValue();
-            chatUserItemController.setVisible(isUsernameMatch(chatUserItemController));
+            if (userFilterController.isFilterApplied()) {
+              chatUserItemController.setVisible(userFilterController.filterUser(chatUserItemController));
+            } else {
+              chatUserItemController.setVisible(isUsernameMatch(chatUserItemController));
+            }
           }
         }
       }
@@ -446,6 +450,7 @@ public class ChannelTabController extends AbstractChatTabController {
         chatUserItemController.setVisible(isUsernameMatch(chatUserItemController));
       }
       if (userFilterController.isFilterApplied()) {
+        //below includes filtering for username
         chatUserItemController.setVisible(userFilterController.filterUser(chatUserItemController));
       }
     }
